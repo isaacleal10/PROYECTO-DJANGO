@@ -27,9 +27,8 @@ Finally, run the development server:
 python manage.py runserver
 ```
 
-The project will be available at **127.0.0.1:8000**.
 
 
 ## License
 
-The source code is released under the [MIT License](https://github.com/Prospect121/django_dashboard_chart_js/blob/master/LICENSE.md).
+The source code is released under the [MIT License](https://github.com/isaacleal10/PROYECTODJANGO/blob/master/LICENSE.md).
