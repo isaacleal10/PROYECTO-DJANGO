@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>{% block title %}Dashboard{% endblock %}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+  <!-- Add additional CSS in static file -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+
+      const showNavbar = (toggleId, navId, bodyId, headerId) => {
+        const toggle = document.getElementById(toggleId),
+          nav = document.getElementById(navId),
+          bodypd = document.getElementById(bodyId),
+          headerpd = document.getElementById(headerId)
+
+        // Validate that all variables exist
+        if (toggle && nav && bodypd && headerpd) {
+          toggle.addEventListener('click', () => {
+            // show navbar
+            nav.classList.toggle('show')
+            // change icon
+            toggle.classList.toggle('bx-x')
+            // add padding to body
+            bodypd.classList.toggle('body-pd')
+            // add padding to header
+            headerpd.classList.toggle('body-pd')
+          })
+        }
+      }
+
+      showNavbar('header-toggle', 'nav-bar', 'body-pd', 'header')
+
+      /*===== LINK ACTIVE =====*/
+      const linkColor = document.querySelectorAll('.nav_link')
+
+      function colorLink() {
+        if (linkColor) {
+          linkColor.forEach(l => l.classList.remove('active'))
+          this.classList.add('active')
+        }
+      }
+      let pathname = window.location.pathname;
+      linkColor.forEach(l => {
+        l.addEventListener('click', colorLink)
+        const href = l.getAttribute("href");
+        if(href === pathname) {
+          l.classList.add('active')
+        }
+        
+      })
+
+      // Your code to run since DOM is loaded and ready
+    });
+  </script>
+
+</head>
+<body id="body-pd">
+  <header class="header" id="header">
+    <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+    <h4> 5 Dimensiones de Cartagena Como Vamos del 2019 al 2021</h4>
+    <div class="header_img"> <a href="/admin/">
+      <img src="https://cdn-icons-png.flaticon.com/512/2206/2206368.png" alt="">
+    </a> </div>
+  </header>
+  <div class="l-navbar" id="nav-bar">
+    <nav class="nav">
+      <div> 
+        <a href="#" class="nav_logo"> 
+          <i class='bx bx-layer nav_logo-icon'></i> 
+          <span class="nav_logo-name">Django Isaac Leal</span> 
+        </a>
+        <div class="nav_list">
+            <a href="{% url 'home' %}" class="nav_link">
+                <i class='bx bx-grid-alt nav_icon'></i>
+                <span class="nav_name">Dashboard</span>
+            </a>
+            <a href="{% url 'deaths-violent' %}" class="nav_link">
+                <i class='bx bxs-radiation nav_icon'></i>
+                <span class="nav_name">Muertes violentas</span>
+            </a>
+            <a href="{% url 'vehicle' %}" class="nav_link">
+                <i class='bx bx-car nav_icon'></i>
+                <span class="nav_name">Movilidad</span>
+            </a>
+            <a href="{% url 'living' %}" class="nav_link">
+                <i class='bx bx-building-house nav_icon'></i>
+                <span class="nav_name">Viviendas</span>
+            </a>
+            <a href="{% url 'infrastructure-road' %}" class="nav_link">
+                <i class='bx bx-trip nav_icon'></i>
+                <span class="nav_name">Infraestructura vial</span>
+            </a>
+            <a href="{% url 'domestic-violence' %}" class="nav_link">
+                <i class='bx bx-male-female nav_icon'></i>
+                <span class="nav_name">Violencia intrafamiliar</span>
+            </a>
+        </div>
+      </div> 
+    </nav>
+  </div>
+  <!--Container Main start-->
+  <div class="height-100 bg-light">
+    {% block content %}{% endblock %}
+  </div>
+  <!--Container Main end-->
+  <footer class="bg-light text-center text-lg-start">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: #4723D9; color: #dcd8ea">
+      © 2022 Copyright:
+      <a style="color: #e73bd7" href="#">Isaac Leal</a>
+      <ul> 
+        <li>Isaac Leal</li> 
+   </ul>
+    </div>
+    <!-- Copyright -->
+  </footer>
+</body>
+
+</html>
